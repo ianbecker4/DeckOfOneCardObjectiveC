@@ -35,7 +35,7 @@ class DVMCardViewController: UIViewController {
     */
     func fetchCards() {
         // Retrieve a card from the api
-        DVMCardController.drawNewCard(1) { (cards) in
+        DVMCardController.drawANewCard(1) { (cards) in
             // Unwrap our cards array that is completed with
             if let cards = cards {
                 // Fetch the image for the first card (since we passed in 1 for the card count, we just need to access the first card in the array)
