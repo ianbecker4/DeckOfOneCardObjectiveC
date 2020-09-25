@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DVMCardController : NSObject
 
-+ (instancetype)sharedInstance;
+//+ (instancetype)sharedInstance;
 
 + (void)drawANewCard:(NSNumber *)numberOfCards
           completion:(void(^) (NSArray<DVMCard *> * _Nullable cards))completion;

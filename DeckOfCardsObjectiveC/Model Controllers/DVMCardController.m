@@ -16,21 +16,21 @@ static NSString * const cardsArrayKey = @"cards";
 
 @implementation DVMCardController
 
-+ (instancetype)sharedInstance
-{
-    static DVMCardController * sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^ {
-        sharedInstance = [DVMCardController new];
-    });
-
-    return sharedInstance;
-}
+//+ (instancetype)sharedInstance
+//{
+//    static DVMCardController * sharedInstance = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^ {
+//        sharedInstance = [DVMCardController new];
+//    });
+//
+//    return sharedInstance;
+//}
 
 + (void)drawANewCard:(NSNumber *)numberOfCards completion:(void (^)(NSArray<DVMCard *> * _Nullable))completion{
     NSURL * baseURL = [NSURL URLWithString:baseURLString];
     NSURL * drawURL = [baseURL URLByAppendingPathComponent:drawComponent];
-    NSString * cardCount = [NSString stringWithFormat:@"%ld", (long)numberOfCards];
+    NSString * cardCount = [numberOfCards stringValue];
     NSURLComponents * urlComponents = [NSURLComponents componentsWithURL:drawURL resolvingAgainstBaseURL:true];
     NSURLQueryItem *queryItem = [NSURLQueryItem queryItemWithName:countQueryName value:cardCount];
     urlComponents.queryItems = @[queryItem];
@@ -50,7 +50,7 @@ static NSString * const cardsArrayKey = @"cards";
             completion(nil); return;
         }
         
-        NSDictionary * jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+        NSDictionary * jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:2 error:&error];
         
         if (!jsonDictionary || ![jsonDictionary isKindOfClass:[NSDictionary class]])
         {
